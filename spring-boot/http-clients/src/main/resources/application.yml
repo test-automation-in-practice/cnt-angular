@@ -1,5 +1,0 @@
-client:
-  mode: okhttp
-
-library-service:
-  base-url: "http://localhost:8081"
