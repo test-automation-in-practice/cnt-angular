@@ -1,3 +1,0 @@
-= Spring Boot: Caching
-
-This module demonstrates how to efficiently test caching related code in Spring Boot application.

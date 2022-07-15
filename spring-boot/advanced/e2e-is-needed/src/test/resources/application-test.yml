@@ -1,9 +1,0 @@
-services:
-  book-catalogue:
-    protocol: http
-    host: localhost
-    port: ${wiremock.server.port:8081}
-  media-collection:
-    protocol: http
-    host: localhost
-    port: ${wiremock.server.port:8081}
