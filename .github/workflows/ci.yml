@@ -2,7 +2,7 @@ name: Angular CI-Build
 
 on:
   push:
-    branches: [master, wip-restructure]
+    branches: [master]
   pull_request:
     branches: [master]
 
