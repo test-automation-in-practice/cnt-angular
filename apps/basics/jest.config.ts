@@ -13,6 +13,7 @@ export default {
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },
+  globalSetup: 'jest-preset-angular/global-setup',
   transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',

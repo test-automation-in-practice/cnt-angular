@@ -1,8 +1,7 @@
 {
   "projectType": "application",
-  "root": "apps/basics",
   "sourceRoot": "apps/basics/src",
-  "prefix": "basics",
+  "prefix": "cntws",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",

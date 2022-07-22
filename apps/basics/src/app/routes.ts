@@ -1,8 +1,9 @@
 import { Type } from '@angular/core';
 import { WeatherPageComponent } from './pages/weather/weather-page.component';
 import { EntryComponent } from './pages/entry/entry.component';
+import { NavbarEntry } from '@cntws/layout';
 
-class DefinedRoute {
+class DefinedRoute implements NavbarEntry {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(public path: string, public component: Type<any>, public displayName: string) {}
 

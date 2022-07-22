@@ -1,8 +1,8 @@
 import '../../testing-helpers/window.mock';
 import { MockBuilder, MockRender, MockService } from 'ng-mocks';
 import { WeatherPageComponent } from './weather-page.component';
-import { WeatherModule } from './weather.module';
-import { WeatherLocation, WeatherService } from './service/weather.service';
+import { WeatherPageModule } from './weather-page.module';
+import { WeatherService } from './service/weather.service';
 import { of } from 'rxjs';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
@@ -18,15 +18,13 @@ import { MatCardModule } from '@angular/material/card';
 import { WeatherIntroductionComponent } from './paragraphs/introduction/weather-introduction.component';
 import { WeatherExplanationComponent } from './paragraphs/explanation/weather-explanation.component';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { LocationComponent } from './components/location/location.component';
-import { ErrorMessageComponent } from './components/error-message/error-message.component';
-import { LoadingComponent } from './components/loading/loading/loading.component';
-import { WeatherResultsComponent } from './components/result/weather-results.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { WeatherLocation, WeatherModule } from '@cntws/weather';
+import { ErrorMessageComponent, LoadingComponent } from '@cntws/shared';
 
 type serviceMockProps = {
   isLoading?: boolean;
@@ -47,7 +45,7 @@ function createServiceMock(opts: serviceMockProps) {
 
 const MaterialModules = [MatCardModule, MatExpansionModule, MatInputModule, MatButtonModule, MatDividerModule, MatProgressSpinnerModule];
 
-describe('A user visiting the Component Testing Page', () => {
+describe('Weather Page: A user visiting the page', () => {
   /**
    * These tests are testing the complete module and give us confidence for bigger refactorings.
    * They are rather brittle and thus, we have to use them carefully.
@@ -61,16 +59,16 @@ describe('A user visiting the Component Testing Page', () => {
 
     beforeEach(async () => {
       return TestBed.configureTestingModule({
-        declarations: [
-          WeatherPageComponent,
-          WeatherIntroductionComponent,
-          WeatherExplanationComponent,
-          LocationComponent,
+        declarations: [WeatherPageComponent, WeatherIntroductionComponent, WeatherExplanationComponent],
+        imports: [
+          NoopAnimationsModule,
+          WeatherModule,
+          HttpClientTestingModule,
+          ReactiveFormsModule,
           ErrorMessageComponent,
           LoadingComponent,
-          WeatherResultsComponent,
+          ...MaterialModules,
         ],
-        imports: [NoopAnimationsModule, HttpClientTestingModule, ReactiveFormsModule, ...MaterialModules],
         providers: [WeatherService],
       }).compileComponents();
     });
@@ -128,7 +126,7 @@ describe('A user visiting the Component Testing Page', () => {
   });
 
   describe('should have a consistent layout', () => {
-    beforeEach(() => MockBuilder(WeatherPageComponent, WeatherModule));
+    beforeEach(() => MockBuilder(WeatherPageComponent, WeatherPageModule));
 
     it('if the service is loading', () => {
       const service = createServiceMock({ isLoading: true });

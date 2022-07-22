@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'basics-entry',
+  selector: 'cntws-entry',
   templateUrl: './entry.component.html',
   styleUrls: ['./entry.component.scss'],
 })
