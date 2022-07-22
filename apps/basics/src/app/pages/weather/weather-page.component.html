@@ -1,21 +1,21 @@
 <h1>Weather App Basic examples</h1>
-<basics-weather-introduction class="block pb-4"></basics-weather-introduction>
+<cntws-weather-introduction class="block pb-4"></cntws-weather-introduction>
 <div class="block relative min-h-100">
   <ng-container *ngIf="(isLoading$ | async) === false">
-    <basics-location
+    <cntws-location
       *ngIf="(mainLocation$ | async) !== null"
       (searched)="search($event)"
       [defaultLocation]="(mainLocation$ | async)!"
       class="block pb-4"
-    ></basics-location>
-    <basics-weather-results
+    ></cntws-location>
+    <cntws-weather-results
       *ngIf="weather$ | async"
       [weatherLocations]="(weather$ | async)!"
       (savedLocation)="saveLocation($event)"
       class="block pb-4"
-    ></basics-weather-results>
-    <basics-error-message *ngIf="warning$ | async as message" [message]="message!" class="block mb-3"></basics-error-message>
+    ></cntws-weather-results>
+    <cntws-error-message *ngIf="warning$ | async as message" [message]="message!" class="block mb-3"></cntws-error-message>
   </ng-container>
-  <basics-loading *ngIf="isLoading$ | async"></basics-loading>
+  <cntws-loading *ngIf="isLoading$ | async"></cntws-loading>
 </div>
-<basics-weather-explanation class="block pb-4"></basics-weather-explanation>
+<cntws-weather-explanation class="block pb-4"></cntws-weather-explanation>

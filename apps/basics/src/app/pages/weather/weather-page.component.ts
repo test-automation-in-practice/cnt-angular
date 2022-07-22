@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { WeatherService, WeatherLocation } from './service/weather.service';
+import { WeatherService } from './service/weather.service';
+import { WeatherLocation } from '@cntws/weather';
 
 @Component({
-  selector: 'basics-weather-page',
+  selector: 'cntws-weather-page',
   templateUrl: './weather-page.component.html',
   styleUrls: ['./weather-page.component.scss'],
 })

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'basics-weather-explanation',
+  selector: 'cntws-weather-explanation',
   templateUrl: './weather-explanation.component.html',
 })
 export class WeatherExplanationComponent {}

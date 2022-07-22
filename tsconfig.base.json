@@ -13,8 +13,12 @@
     "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": "./angular",
-    "paths": {}
+    "baseUrl": ".",
+    "paths": {
+      "@cntws/layout": ["libs/layout/src/index.ts"],
+      "@cntws/shared": ["libs/shared/src/index.ts"],
+      "@cntws/weather": ["libs/weather/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
