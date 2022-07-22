@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navbar: A user viewing the navbar should have a consistent layout 1`] = `
+<mock-render
+  __ngContext__="0"
+>
+  <cntws-navbar>
+    <mat-toolbar
+      class="w-screen"
+      color="primary"
+    >
+    </mat-toolbar>
+  </cntws-navbar>
+</mock-render>
+`;
