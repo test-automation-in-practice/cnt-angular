@@ -5,6 +5,8 @@
     "basics": "apps/basics",
     "basics-e2e": "apps/basics-e2e",
     "layout": "libs/layout",
+    "ngrx": "apps/ngrx",
+    "ngrx-e2e": "apps/ngrx-e2e",
     "shared": "libs/shared",
     "weather": "libs/weather"
   }
