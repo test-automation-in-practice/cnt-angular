@@ -5,6 +5,7 @@ import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
 import { WeatherLocation } from '@cntws/weather';
 
 export interface WeatherApiModel {
+  id: number;
   temp: number;
   name: string;
 }
@@ -32,7 +33,7 @@ export class WeatherService {
   constructor(private http: HttpClient) {}
 
   private static mapApiModel(apiModel: WeatherApiModel[]): WeatherLocation[] {
-    return apiModel.map((apiWeather) => ({ temp: apiWeather.temp, location: apiWeather.name }));
+    return apiModel.map((apiWeather) => ({ id: apiWeather.id, temp: apiWeather.temp, location: apiWeather.name }));
   }
 
   getMainLocation(): void {

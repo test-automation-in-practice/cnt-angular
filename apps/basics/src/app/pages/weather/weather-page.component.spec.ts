@@ -143,8 +143,8 @@ describe('Weather Page: A user visiting the page', () => {
     it('if the service has no warning', () => {
       const service = createServiceMock({
         weather: [
-          { location: 'Stuttgart', temp: 23 },
-          { location: 'Frankfurt', temp: 15 },
+          { id: 1, location: 'Stuttgart', temp: 23 },
+          { id: 2, location: 'Frankfurt', temp: 15 },
         ],
       });
       const fixture = MockRender(WeatherPageComponent, {}, { providers: [{ provide: WeatherService, useValue: service }] });

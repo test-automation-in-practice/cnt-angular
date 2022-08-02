@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { WeatherService } from './service/weather.service';
-import { WeatherLocation } from '@cntws/weather';
+import { Component } from "@angular/core";
+import { WeatherLocation } from "@cntws/weather";
+import { WeatherFacade } from "./+state/weather.facade";
+import { map } from "rxjs";
 
 @Component({
   selector: 'cntws-weather-page',
@@ -8,25 +9,25 @@ import { WeatherLocation } from '@cntws/weather';
   styleUrls: ['./weather-page.component.scss'],
 })
 export class WeatherPageComponent {
-  weather$ = this.service.weather$;
-  warning$ = this.service.warning$;
-  isLoading$ = this.service.isLoading$;
-  mainLocation$ = this.service.mainLocation$;
+  weather$ = this.weather.weather;
+  warning$ = this.weather.error$;
+  isLoading$ = this.weather.loaded$.pipe(map(l => !l));
+  mainLocation$ = this.weather.mainLocation$;
 
-  constructor(private service: WeatherService) {
-    this.service.getMainLocation();
+  constructor(private weather: WeatherFacade) {
+    this.weather.init();
     this.mainLocation$.subscribe((location) => {
       if (location) {
-        this.service.getWeatherForLocation(location);
+        this.weather.loadWeatherForLocation(location);
       }
     });
   }
 
   search(location: string) {
-    this.service.getWeatherForLocation(location);
+    this.weather.loadWeatherForLocation(location);
   }
 
   saveLocation(location: WeatherLocation) {
-    this.service.saveMainLocation(location.location);
+    this.weather.saveDefaultLocation(location.location);
   }
 }

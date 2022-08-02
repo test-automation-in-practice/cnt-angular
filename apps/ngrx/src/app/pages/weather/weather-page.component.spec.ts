@@ -1,30 +1,35 @@
-import '../../testing-helpers/window.mock';
-import { MockBuilder, MockRender, MockService } from 'ng-mocks';
-import { WeatherPageComponent } from './weather-page.component';
-import { WeatherPageModule } from './weather-page.module';
-import { WeatherService } from './service/weather.service';
-import { of } from 'rxjs';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HarnessLoader } from '@angular/cdk/testing';
-import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { environment } from '../../../environments/environment';
-import { ApiModelGenerators } from '../../testing-helpers/api-model-generators';
-import { MatCardHarness } from '@angular/material/card/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputHarness } from '@angular/material/input/testing';
-import { MatButtonHarness } from '@angular/material/button/testing';
-import { MatCardModule } from '@angular/material/card';
-import { WeatherIntroductionComponent } from './paragraphs/introduction/weather-introduction.component';
-import { WeatherExplanationComponent } from './paragraphs/explanation/weather-explanation.component';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { WeatherLocation, WeatherModule } from '@cntws/weather';
-import { ErrorMessageComponent, LoadingComponent } from '@cntws/shared';
+import "../../testing-helpers/window.mock";
+import { MockBuilder, MockRender, MockService, ngMocks } from "ng-mocks";
+import { WeatherPageComponent } from "./weather-page.component";
+import { WeatherPageModule } from "./weather-page.module";
+import { WeatherService } from "./service/weather.service";
+import { of } from "rxjs";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
+import { HarnessLoader } from "@angular/cdk/testing";
+import { TestbedHarnessEnvironment } from "@angular/cdk/testing/testbed";
+import { environment } from "../../../environments/environment";
+import { ApiModelGenerators } from "../../testing-helpers/api-model-generators";
+import { MatCardHarness } from "@angular/material/card/testing";
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
+import { MatInputHarness } from "@angular/material/input/testing";
+import { MatButtonHarness } from "@angular/material/button/testing";
+import { MatCardModule } from "@angular/material/card";
+import { WeatherIntroductionComponent } from "./paragraphs/introduction/weather-introduction.component";
+import { WeatherExplanationComponent } from "./paragraphs/explanation/weather-explanation.component";
+import { MatExpansionModule } from "@angular/material/expansion";
+import { MatInputModule } from "@angular/material/input";
+import { MatButtonModule } from "@angular/material/button";
+import { ReactiveFormsModule } from "@angular/forms";
+import { MatDividerModule } from "@angular/material/divider";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { WeatherLocation, WeatherModule } from "@cntws/weather";
+import { ErrorMessageComponent, LoadingComponent } from "@cntws/shared";
+import { StoreModule } from "@ngrx/store";
+import * as fromWeather from "./+state/weather.reducer";
+import { EffectsModule } from "@ngrx/effects";
+import { WeatherEffects } from "./+state/weather.effects";
+import { WeatherFacade } from "./+state/weather.facade";
 
 type serviceMockProps = {
   isLoading?: boolean;
@@ -33,14 +38,14 @@ type serviceMockProps = {
   mainLocation?: string | undefined;
 };
 
-function createServiceMock(opts: serviceMockProps) {
+function createWeatherFacade(opts: serviceMockProps) {
   const stateOverrides = {
-    isLoading$: of(!!opts.isLoading),
-    warning$: of(opts.warning),
+    loaded$: of(!opts.isLoading),
+    error$: of(opts.warning),
     weather$: of(opts.weather ? opts.weather : []),
     mainLocation$: of(opts.mainLocation),
   };
-  return MockService(WeatherService, stateOverrides);
+  return MockService(WeatherFacade, stateOverrides);
 }
 
 const MaterialModules = [MatCardModule, MatExpansionModule, MatInputModule, MatButtonModule, MatDividerModule, MatProgressSpinnerModule];
@@ -68,8 +73,10 @@ describe('Weather Page: A user visiting the page', () => {
           ErrorMessageComponent,
           LoadingComponent,
           ...MaterialModules,
+          StoreModule.forRoot({[fromWeather.WEATHER_FEATURE_KEY]: fromWeather.weatherReducer}),
+          EffectsModule.forRoot([WeatherEffects]),
         ],
-        providers: [WeatherService],
+        providers: [WeatherService, WeatherFacade],
       }).compileComponents();
     });
 
@@ -126,29 +133,32 @@ describe('Weather Page: A user visiting the page', () => {
   });
 
   describe('should have a consistent layout', () => {
-    beforeEach(() => MockBuilder(WeatherPageComponent, WeatherPageModule));
+    beforeEach(() => {
+      ngMocks.reset();
+      return MockBuilder(WeatherPageComponent, WeatherPageModule);
+    });
 
     it('if the service is loading', () => {
-      const service = createServiceMock({ isLoading: true });
-      const fixture = MockRender(WeatherPageComponent, {}, { providers: [{ provide: WeatherService, useValue: service }] });
-      expect(fixture).toMatchSnapshot();
+      const facade = createWeatherFacade({ isLoading: true });
+      const fixture = MockRender(WeatherPageComponent, {}, { providers: [{ provide: WeatherFacade, useValue: facade }] });
+      expect(fixture.point.nativeElement).toMatchSnapshot();
     });
 
     it('if the service has a warning', () => {
-      const service = createServiceMock({ warning: 'This is a warning!' });
-      const fixture = MockRender(WeatherPageComponent, {}, { providers: [{ provide: WeatherService, useValue: service }] });
-      expect(fixture).toMatchSnapshot();
+      const facade = createWeatherFacade({ warning: 'This is a warning!' });
+      const fixture = MockRender(WeatherPageComponent, {}, { providers: [{ provide: WeatherFacade, useValue: facade }], reset: true });
+      expect(fixture.point.nativeElement).toMatchSnapshot();
     });
 
     it('if the service has no warning', () => {
-      const service = createServiceMock({
+      const facade = createWeatherFacade({
         weather: [
-          { location: 'Stuttgart', temp: 23 },
-          { location: 'Frankfurt', temp: 15 },
+          { id: 1, location: 'Stuttgart', temp: 23 },
+          { id: 2, location: 'Frankfurt', temp: 15 },
         ],
       });
-      const fixture = MockRender(WeatherPageComponent, {}, { providers: [{ provide: WeatherService, useValue: service }] });
-      expect(fixture).toMatchSnapshot();
+      const fixture = MockRender(WeatherPageComponent, {}, { providers: [{ provide: WeatherFacade, useValue: facade }] });
+      expect(fixture.point.nativeElement).toMatchSnapshot();
     });
   });
 });

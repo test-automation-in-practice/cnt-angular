@@ -10,16 +10,16 @@ describe('Weather Results: A user', () => {
 
     it('should see a consistent layout', () => {
       const weatherLocations: WeatherLocation[] = [
-        { temp: 25, location: 'Stuttgart' },
-        { temp: 22, location: 'Freiburg' },
+        { id: 1, temp: 25, location: 'Stuttgart' },
+        { id: 2, temp: 22, location: 'Freiburg' },
       ];
       const fixture = MockRender(WeatherResultsComponent, { weatherLocations });
       expect(fixture).toMatchSnapshot();
     });
 
     it('should be able to save their location', () => {
-      const stuttgartLocation = { temp: 25, location: 'Stuttgart' };
-      const weatherLocations: WeatherLocation[] = [stuttgartLocation, { temp: 22, location: 'Freiburg' }];
+      const stuttgartLocation = { id: 1, temp: 25, location: 'Stuttgart' };
+      const weatherLocations: WeatherLocation[] = [stuttgartLocation, { id: 2, temp: 22, location: 'Freiburg' }];
       const fixture = MockRender(WeatherResultsComponent, { weatherLocations });
       jest.spyOn(fixture.point.componentInstance.savedLocation, 'emit');
       const card = fixture.debugElement.query(By.css(`#location-${stuttgartLocation.location}`));
