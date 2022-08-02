@@ -3,8 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { WeatherService } from './weather.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { environment } from '../../../../environments/environment';
-import { toPromise } from '../../../testing-helpers/observables';
-import { ApiModelGenerators } from '../../../testing-helpers/api-model-generators';
+import { ApiModelGenerators, toPromise } from '@cntws/testing';
 
 describe('WeatherService', () => {
   let service: WeatherService;
@@ -33,7 +32,7 @@ describe('WeatherService', () => {
       request.flush(ApiModelGenerators.createWeatherApiModel(location, temp));
 
       const weather = await toPromise(service.weather$);
-      expect(weather).toEqual([{ temp, location }]);
+      expect(weather[0]).toEqual(expect.objectContaining({ temp, location }));
     });
 
     it('should activate the loading state when requesting', async () => {

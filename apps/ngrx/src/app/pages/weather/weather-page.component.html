@@ -1,7 +1,7 @@
 <h1>Weather App Basic examples</h1>
 <cntws-weather-introduction class="block pb-4"></cntws-weather-introduction>
 <div class="block relative min-h-100">
-  <ng-container *ngIf="(isLoading$ | async) === false">
+  <ng-container *ngIf="(isLoading$ | async) !== true">
     <cntws-location
       *ngIf="(mainLocation$ | async) !== null"
       (searched)="search($event)"
@@ -9,7 +9,7 @@
       class="block pb-4"
     ></cntws-location>
     <cntws-weather-results
-      *ngIf="weather$ | async"
+      *ngIf="(weather$ | async)?.length??0 > 0"
       [weatherLocations]="(weather$ | async)!"
       (savedLocation)="saveLocation($event)"
       class="block pb-4"

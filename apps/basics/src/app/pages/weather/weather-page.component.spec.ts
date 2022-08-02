@@ -9,7 +9,6 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { environment } from '../../../environments/environment';
-import { ApiModelGenerators } from '../../testing-helpers/api-model-generators';
 import { MatCardHarness } from '@angular/material/card/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputHarness } from '@angular/material/input/testing';
@@ -25,6 +24,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { WeatherLocation, WeatherModule } from '@cntws/weather';
 import { ErrorMessageComponent, LoadingComponent } from '@cntws/shared';
+import { ApiModelGenerators } from '@cntws/testing';
 
 type serviceMockProps = {
   isLoading?: boolean;
@@ -131,24 +131,24 @@ describe('Weather Page: A user visiting the page', () => {
     it('if the service is loading', () => {
       const service = createServiceMock({ isLoading: true });
       const fixture = MockRender(WeatherPageComponent, {}, { providers: [{ provide: WeatherService, useValue: service }] });
-      expect(fixture).toMatchSnapshot();
+      expect(fixture.point.nativeElement).toMatchSnapshot();
     });
 
     it('if the service has a warning', () => {
       const service = createServiceMock({ warning: 'This is a warning!' });
       const fixture = MockRender(WeatherPageComponent, {}, { providers: [{ provide: WeatherService, useValue: service }] });
-      expect(fixture).toMatchSnapshot();
+      expect(fixture.point.nativeElement).toMatchSnapshot();
     });
 
     it('if the service has no warning', () => {
       const service = createServiceMock({
         weather: [
-          { location: 'Stuttgart', temp: 23 },
-          { location: 'Frankfurt', temp: 15 },
+          { id: 1, location: 'Stuttgart', temp: 23 },
+          { id: 2, location: 'Frankfurt', temp: 15 },
         ],
       });
       const fixture = MockRender(WeatherPageComponent, {}, { providers: [{ provide: WeatherService, useValue: service }] });
-      expect(fixture).toMatchSnapshot();
+      expect(fixture.point.nativeElement).toMatchSnapshot();
     });
   });
 });
