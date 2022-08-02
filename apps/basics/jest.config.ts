@@ -1,4 +1,6 @@
 /* eslint-disable */
+const esModules = ['@angular', '@ngrx'];
+
 export default {
   displayName: 'basics',
   preset: '../../jest.preset.js',
@@ -14,7 +16,7 @@ export default {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },
   globalSetup: 'jest-preset-angular/global-setup',
-  transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
+  transformIgnorePatterns: [`<rootDir>/node_modules/(?!.*\\.mjs$|${esModules.join('|')})`],
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
     'jest-preset-angular/build/serializers/ng-snapshot',

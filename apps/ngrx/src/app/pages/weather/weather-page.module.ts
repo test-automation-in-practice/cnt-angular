@@ -14,6 +14,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { WeatherModule } from '@cntws/weather';
 import { ErrorMessageComponent, LoadingComponent } from '@cntws/shared';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import * as fromWeather from './+state/weather.reducer';
+import { WeatherEffects } from './+state/weather.effects';
+import { WeatherFacade } from './+state/weather.facade';
 
 @NgModule({
   declarations: [WeatherPageComponent, WeatherIntroductionComponent, WeatherExplanationComponent],
@@ -30,7 +35,9 @@ import { ErrorMessageComponent, LoadingComponent } from '@cntws/shared';
     WeatherModule,
     ErrorMessageComponent,
     LoadingComponent,
+    StoreModule.forFeature(fromWeather.WEATHER_FEATURE_KEY, fromWeather.weatherReducer),
+    EffectsModule.forFeature([WeatherEffects]),
   ],
-  providers: [WeatherService],
+  providers: [WeatherService, WeatherFacade],
 })
 export class WeatherPageModule {}

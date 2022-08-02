@@ -17,6 +17,7 @@
     "paths": {
       "@cntws/layout": ["libs/layout/src/index.ts"],
       "@cntws/shared": ["libs/shared/src/index.ts"],
+      "@cntws/testing": ["libs/testing/src/index.ts"],
       "@cntws/weather": ["libs/weather/src/index.ts"]
     }
   },

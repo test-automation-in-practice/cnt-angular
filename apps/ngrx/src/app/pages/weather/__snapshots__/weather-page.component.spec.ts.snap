@@ -1,83 +1,82 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Weather Page: A user visiting the page should have a consistent layout if the service has a warning 1`] = `
-<mock-render
-  __ngContext__={[Function Number]}
->
-  <cntws-weather-page>
-    <h1>
-      Weather App Basic examples
-    </h1>
-    <cntws-weather-introduction
+<cntws-weather-page>
+  <h1>
+    Weather App Basic examples
+  </h1>
+  <cntws-weather-introduction
+    class="block pb-4"
+  />
+  <div
+    class="block relative min-h-100"
+  >
+    <cntws-location
       class="block pb-4"
     />
-    <div
-      class="block relative min-h-100"
-    >
-      <cntws-location
-        class="block pb-4"
-      />
-      <cntws-weather-results
-        class="block pb-4"
-      />
-      <cntws-error-message
-        class="block mb-3"
-      />
-    </div>
-    <cntws-weather-explanation
-      class="block pb-4"
+    
+    
+    <cntws-error-message
+      class="block mb-3"
     />
-  </cntws-weather-page>
-</mock-render>
+    
+    
+    
+    
+  </div>
+  <cntws-weather-explanation
+    class="block pb-4"
+  />
+</cntws-weather-page>
 `;
 
-exports[`Weather Page: A user visiting the page should have a consistent layout if the service has no warning 1`] = `
-<mock-render
-  __ngContext__={[Function Number]}
->
-  <cntws-weather-page>
-    <h1>
-      Weather App Basic examples
-    </h1>
-    <cntws-weather-introduction
+exports[`Weather Page: A user visiting the page should have a consistent layout if the service has no warning and results 1`] = `
+<cntws-weather-page>
+  <h1>
+    Weather App Basic examples
+  </h1>
+  <cntws-weather-introduction
+    class="block pb-4"
+  />
+  <div
+    class="block relative min-h-100"
+  >
+    <cntws-location
       class="block pb-4"
     />
-    <div
-      class="block relative min-h-100"
-    >
-      <cntws-location
-        class="block pb-4"
-      />
-      <cntws-weather-results
-        class="block pb-4"
-      />
-    </div>
-    <cntws-weather-explanation
+    
+    <cntws-weather-results
       class="block pb-4"
     />
-  </cntws-weather-page>
-</mock-render>
+    
+    
+    
+    
+    
+  </div>
+  <cntws-weather-explanation
+    class="block pb-4"
+  />
+</cntws-weather-page>
 `;
 
 exports[`Weather Page: A user visiting the page should have a consistent layout if the service is loading 1`] = `
-<mock-render
-  __ngContext__={[Function Number]}
->
-  <cntws-weather-page>
-    <h1>
-      Weather App Basic examples
-    </h1>
-    <cntws-weather-introduction
-      class="block pb-4"
-    />
-    <div
-      class="block relative min-h-100"
-    >
-      <cntws-loading />
-    </div>
-    <cntws-weather-explanation
-      class="block pb-4"
-    />
-  </cntws-weather-page>
-</mock-render>
+<cntws-weather-page>
+  <h1>
+    Weather App Basic examples
+  </h1>
+  <cntws-weather-introduction
+    class="block pb-4"
+  />
+  <div
+    class="block relative min-h-100"
+  >
+    
+    <cntws-loading />
+    
+  </div>
+  <cntws-weather-explanation
+    class="block pb-4"
+  />
+</cntws-weather-page>
 `;
