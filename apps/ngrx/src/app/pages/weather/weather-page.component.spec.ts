@@ -150,7 +150,7 @@ describe('Weather Page: A user visiting the page', () => {
       expect(fixture.point.nativeElement).toMatchSnapshot();
     });
 
-    it('if the service has no warning', () => {
+    it('if the service has no warning and results', () => {
       const facade = createWeatherFacade({
         weather: [
           { id: 1, location: 'Stuttgart', temp: 23 },

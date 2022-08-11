@@ -12,8 +12,8 @@ export class WeatherEffects {
         ofType(WeatherActions.initWeather),
         exhaustMap((action) => {
           return this.weatherService.getMainLocation().pipe(
-            map(locationname => WeatherActions.loadMainLocationSuccess({ locationname })),
-            catchError(error => of(WeatherActions.loadMainLocationFailure({message: error.error.message})))
+            map(location => WeatherActions.loadMainLocationSuccess({ location })),
+            catchError(error => of(WeatherActions.loadMainLocationFailure({error: error.error.message})))
           )
         })
       );
@@ -22,23 +22,27 @@ export class WeatherEffects {
 
   loadWeather$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(WeatherActions.loadWeather),
+      ofType(
+        WeatherActions.loadWeather,
+        WeatherActions.loadMainLocationSuccess,
+        WeatherActions.saveMainLocationSuccess
+      ),
       exhaustMap((action) => {
         return this.weatherService.getWeatherForLocation(action.location).pipe(
           map(weather => WeatherActions.loadWeatherSuccess({ weather })),
-          catchError(error => of(WeatherActions.loadWeatherFailure({message: error.error.message})))
+          catchError(error => of(WeatherActions.loadWeatherFailure({error: error.error.message})))
         )
       })
     );
   });
 
-  saveWeatherLocation$ = createEffect(() => {
+  saveMainLocation$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(WeatherActions.saveDefaultLocation),
+      ofType(WeatherActions.saveMainLocation),
       exhaustMap((action) => {
         return this.weatherService.saveMainLocation(action.location).pipe(
-          map(location => WeatherActions.saveDefaultLocationSuccess({ location })),
-          catchError(error => of(WeatherActions.saveDefaultLocationFailure({message: error.error.message})))
+          map(location => WeatherActions.saveMainLocationSuccess({ location })),
+          catchError(error => of(WeatherActions.saveMainLocationFailure({error: error.error.message})))
         )
       })
     );

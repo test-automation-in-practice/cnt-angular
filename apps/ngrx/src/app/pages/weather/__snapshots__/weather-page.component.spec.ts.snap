@@ -30,7 +30,7 @@ exports[`Weather Page: A user visiting the page should have a consistent layout 
 </cntws-weather-page>
 `;
 
-exports[`Weather Page: A user visiting the page should have a consistent layout if the service has no warning 1`] = `
+exports[`Weather Page: A user visiting the page should have a consistent layout if the service has no warning and results 1`] = `
 <cntws-weather-page>
   <h1>
     Weather App Basic examples
@@ -45,6 +45,9 @@ exports[`Weather Page: A user visiting the page should have a consistent layout 
       class="block pb-4"
     />
     
+    <cntws-weather-results
+      class="block pb-4"
+    />
     
     
     

@@ -7,7 +7,7 @@ import * as WeatherSelectors from "./weather.selectors";
 @Injectable()
 export class WeatherFacade {
   loaded$ = this.store.pipe(select(WeatherSelectors.getWeatherLoaded));
-  weather = this.store.pipe(select(WeatherSelectors.getAllWeather));
+  weather$ = this.store.pipe(select(WeatherSelectors.getWeather));
   mainLocation$ = this.store.pipe(select(WeatherSelectors.getMainLocation));
   error$ = this.store.pipe(select(WeatherSelectors.getWeatherError));
 
@@ -21,7 +21,7 @@ export class WeatherFacade {
     this.store.dispatch(WeatherActions.loadWeather({location}))
   }
 
-  saveDefaultLocation(location: string) {
-    this.store.dispatch(WeatherActions.saveDefaultLocation({location}))
+  saveMainLocation(location: string) {
+    this.store.dispatch(WeatherActions.saveMainLocation({location}))
   }
 }

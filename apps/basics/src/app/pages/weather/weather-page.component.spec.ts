@@ -131,13 +131,13 @@ describe('Weather Page: A user visiting the page', () => {
     it('if the service is loading', () => {
       const service = createServiceMock({ isLoading: true });
       const fixture = MockRender(WeatherPageComponent, {}, { providers: [{ provide: WeatherService, useValue: service }] });
-      expect(fixture).toMatchSnapshot();
+      expect(fixture.point.nativeElement).toMatchSnapshot();
     });
 
     it('if the service has a warning', () => {
       const service = createServiceMock({ warning: 'This is a warning!' });
       const fixture = MockRender(WeatherPageComponent, {}, { providers: [{ provide: WeatherService, useValue: service }] });
-      expect(fixture).toMatchSnapshot();
+      expect(fixture.point.nativeElement).toMatchSnapshot();
     });
 
     it('if the service has no warning', () => {
@@ -148,7 +148,7 @@ describe('Weather Page: A user visiting the page', () => {
         ],
       });
       const fixture = MockRender(WeatherPageComponent, {}, { providers: [{ provide: WeatherService, useValue: service }] });
-      expect(fixture).toMatchSnapshot();
+      expect(fixture.point.nativeElement).toMatchSnapshot();
     });
   });
 });

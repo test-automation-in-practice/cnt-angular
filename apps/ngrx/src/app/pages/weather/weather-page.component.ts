@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { WeatherLocation } from "@cntws/weather";
 import { WeatherFacade } from "./+state/weather.facade";
-import { map } from "rxjs";
+import { map } from 'rxjs';
 
 @Component({
   selector: 'cntws-weather-page',
@@ -9,18 +9,13 @@ import { map } from "rxjs";
   styleUrls: ['./weather-page.component.scss'],
 })
 export class WeatherPageComponent {
-  weather$ = this.weather.weather;
+  weather$ = this.weather.weather$;
   warning$ = this.weather.error$;
   isLoading$ = this.weather.loaded$.pipe(map(l => !l));
   mainLocation$ = this.weather.mainLocation$;
 
   constructor(private weather: WeatherFacade) {
     this.weather.init();
-    this.mainLocation$.subscribe((location) => {
-      if (location) {
-        this.weather.loadWeatherForLocation(location);
-      }
-    });
   }
 
   search(location: string) {
@@ -28,6 +23,6 @@ export class WeatherPageComponent {
   }
 
   saveLocation(location: WeatherLocation) {
-    this.weather.saveDefaultLocation(location.location);
+    this.weather.saveMainLocation(location.location);
   }
 }

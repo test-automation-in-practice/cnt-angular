@@ -19,19 +19,18 @@ export interface WeatherPartialState {
 export const weatherAdapter: EntityAdapter<WeatherLocation> = createEntityAdapter<WeatherLocation>();
 
 export const initialWeatherState: WeatherState = weatherAdapter.getInitialState({
-  // set initial required properties
   loaded: false,
 });
 
 const reducer = createReducer(
   initialWeatherState,
   on(WeatherActions.initWeather, (state) => ({ ...state, loaded: false, error: null })),
-  on(WeatherActions.loadMainLocationSuccess, (state, {locationname}) => ({...state, loaded: true, error: null, mainLocation: locationname })),
+  on(WeatherActions.loadMainLocationSuccess, (state, {location}) => ({...state, loaded: true, error: null, mainLocation: location })),
   on(WeatherActions.loadWeatherSuccess, (state, { weather }) => weatherAdapter.setAll(weather, { ...state, loaded: true, error: null })),
-  on(WeatherActions.saveDefaultLocationSuccess, (state, {location}) => ({...state, loaded: true, error: null, mainLocation: location })),
-  on(WeatherActions.loadWeatherFailure, (state, { message }) => weatherAdapter.setAll([], { ...state, error: message })),
-  on(WeatherActions.saveDefaultLocationFailure, (state, { message }) => weatherAdapter.setAll([], { ...state, error: message })),
-  on(WeatherActions.loadMainLocationFailure, (state, { message }) => weatherAdapter.setAll([], { ...state, error: message })),
+  on(WeatherActions.saveMainLocationSuccess, (state, {location}) => ({...state, loaded: true, error: null, mainLocation: location })),
+  on(WeatherActions.loadWeatherFailure, (state, { error }) => weatherAdapter.setAll([], { ...state, error: error, loaded: true })),
+  on(WeatherActions.saveMainLocationFailure, (state, { error }) => weatherAdapter.setAll([], { ...state, error: error, loaded: true })),
+  on(WeatherActions.loadMainLocationFailure, (state, { error }) => weatherAdapter.setAll([], { ...state, error: error, loaded: true })),
 );
 
 export function weatherReducer(state: WeatherState | undefined, action: Action) {
