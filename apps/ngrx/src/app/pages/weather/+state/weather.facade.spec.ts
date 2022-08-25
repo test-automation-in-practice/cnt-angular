@@ -15,37 +15,23 @@ import { initWeather, loadWeather, saveMainLocation } from './weather.actions';
 import { ApiModelGenerators, toPromise } from '@cntws/testing';
 
 describe('WeatherFacade', () => {
-
   describe('integrative testing', () => {
-
     let facade: WeatherFacade;
     let store: Store;
     let controller: HttpTestingController;
 
     beforeEach(() => {
       @NgModule({
-        imports: [
-          StoreModule.forFeature(WEATHER_FEATURE_KEY, weatherReducer),
-          EffectsModule.forFeature([WeatherEffects])
-        ],
-        providers: [WeatherFacade]
+        imports: [StoreModule.forFeature(WEATHER_FEATURE_KEY, weatherReducer), EffectsModule.forFeature([WeatherEffects])],
+        providers: [WeatherFacade],
       })
-      class CustomFeatureModule {
-      }
+      class CustomFeatureModule {}
 
       @NgModule({
-        imports: [
-          StoreModule.forRoot({}),
-          EffectsModule.forRoot([]),
-          CustomFeatureModule,
-          HttpClientTestingModule
-        ],
-        providers: [
-          WeatherService
-        ]
+        imports: [StoreModule.forRoot({}), EffectsModule.forRoot([]), CustomFeatureModule, HttpClientTestingModule],
+        providers: [WeatherService],
       })
-      class RootModule {
-      }
+      class RootModule {}
 
       TestBed.configureTestingModule({ imports: [RootModule] });
 
@@ -63,12 +49,11 @@ describe('WeatherFacade', () => {
         loaded,
         error,
         weather,
-        mainLocation
+        mainLocation,
       });
     }
 
     describe('initializing the state', () => {
-
       describe('with a main location', () => {
         describe('and weather for that location', () => {
           it('should update the state without an error', async () => {
@@ -82,16 +67,14 @@ describe('WeatherFacade', () => {
             const secondRequest = controller.expectOne(`${environment.weatherApi}/locations?q=${location}`);
             secondRequest.flush(weather);
 
-            const expectedWeather: WeatherLocation[] = [
-              { id: weather[0].id, location, temp }
-            ];
+            const expectedWeather: WeatherLocation[] = [{ id: weather[0].id, location, temp }];
 
             const state = await readStateSnapshot();
             const expectedState = {
               weather: expectedWeather,
               loaded: true,
               error: null,
-              mainLocation: location
+              mainLocation: location,
             };
             expect(state).toEqual(expectedState);
           });
@@ -113,7 +96,7 @@ describe('WeatherFacade', () => {
               weather: [],
               loaded: true,
               error: message,
-              mainLocation: location
+              mainLocation: location,
             };
             expect(state).toEqual(expectedState);
           });
@@ -133,7 +116,7 @@ describe('WeatherFacade', () => {
             weather: [],
             loaded: true,
             error: message,
-            mainLocation: undefined
+            mainLocation: undefined,
           };
           expect(state).toEqual(expectedState);
         });
@@ -151,16 +134,14 @@ describe('WeatherFacade', () => {
           const firstRequest = controller.expectOne(`${environment.weatherApi}/locations?q=${location}`);
           firstRequest.flush(weather);
 
-          const expectedWeather: WeatherLocation[] = [
-            { id: weather[0].id, location, temp }
-          ];
+          const expectedWeather: WeatherLocation[] = [{ id: weather[0].id, location, temp }];
 
           const state = await readStateSnapshot();
           const expectedState = {
             weather: expectedWeather,
             loaded: true,
             error: null,
-            mainLocation: undefined
+            mainLocation: undefined,
           };
           expect(state).toEqual(expectedState);
         });
@@ -180,7 +161,7 @@ describe('WeatherFacade', () => {
             weather: [],
             loaded: true,
             error: message,
-            mainLocation: undefined
+            mainLocation: undefined,
           };
           expect(state).toEqual(expectedState);
         });
@@ -200,16 +181,14 @@ describe('WeatherFacade', () => {
           const secondRequest = controller.expectOne(`${environment.weatherApi}/locations?q=${location}`);
           secondRequest.flush(weather);
 
-          const expectedWeather: WeatherLocation[] = [
-            { id: weather[0].id, location, temp }
-          ];
+          const expectedWeather: WeatherLocation[] = [{ id: weather[0].id, location, temp }];
 
           const state = await readStateSnapshot();
           const expectedState = {
             weather: expectedWeather,
             loaded: true,
             error: null,
-            mainLocation: location
+            mainLocation: location,
           };
           expect(state).toEqual(expectedState);
         });
@@ -229,7 +208,7 @@ describe('WeatherFacade', () => {
             weather: [],
             loaded: true,
             error: message,
-            mainLocation: undefined
+            mainLocation: undefined,
           };
           expect(state).toEqual(expectedState);
         });
@@ -243,7 +222,7 @@ describe('WeatherFacade', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        providers: [provideMockStore(), WeatherFacade]
+        providers: [provideMockStore(), WeatherFacade],
       });
 
       facade = TestBed.inject(WeatherFacade);
@@ -251,10 +230,7 @@ describe('WeatherFacade', () => {
     });
 
     describe('accessing data', () => {
-      test.each([
-        [true],
-        [false]
-      ])('should provide the loaded state if it is %p', async (expected) => {
+      test.each([[true], [false]])('should provide the loaded state if it is %p', async (expected) => {
         store.overrideSelector(getWeatherLoaded, expected);
         store.refreshState();
         const loaded = await toPromise(facade.loaded$);
@@ -262,7 +238,7 @@ describe('WeatherFacade', () => {
       });
 
       it('should provide the loaded weather', async () => {
-        const weather = [{id: 1, location: 'Stuttgart', temp: 25}];
+        const weather = [{ id: 1, location: 'Stuttgart', temp: 25 }];
         store.overrideSelector(getWeather, weather);
         store.refreshState();
         const result = await toPromise(facade.weather$);
@@ -297,14 +273,14 @@ describe('WeatherFacade', () => {
         const location = 'Stuttgart';
         jest.spyOn(store, 'dispatch');
         facade.loadWeatherForLocation(location);
-        expect(store.dispatch).toHaveBeenCalledWith(loadWeather({location}));
+        expect(store.dispatch).toHaveBeenCalledWith(loadWeather({ location }));
       });
 
       it('should dispatch the save main location action on saving the main location', () => {
         const location = 'Stuttgart';
         jest.spyOn(store, 'dispatch');
         facade.saveMainLocation(location);
-        expect(store.dispatch).toHaveBeenCalledWith(saveMainLocation({location}));
+        expect(store.dispatch).toHaveBeenCalledWith(saveMainLocation({ location }));
       });
     });
   });

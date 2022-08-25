@@ -1,13 +1,19 @@
 {
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/ngrx-e2e/src",
   "projectType": "application",
   "targets": {
+    "prepare": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": ["npm run server", "npm run start:ngrx"],
+        "readyWhen": "Angular Live Development Server is listening on localhost:4200"
+      }
+    },
     "e2e": {
       "executor": "@nrwl/cypress:cypress",
       "options": {
         "cypressConfig": "apps/ngrx-e2e/cypress.json",
-        "devServerTarget": "ngrx:serve:development"
+        "devServerTarget": "ngrx-e2e:prepare:development"
       },
       "configurations": {
         "production": {
