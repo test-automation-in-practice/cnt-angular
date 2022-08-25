@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { select, Store } from "@ngrx/store";
+import { Injectable } from '@angular/core';
+import { select, Store } from '@ngrx/store';
 
-import * as WeatherActions from "./weather.actions";
-import * as WeatherSelectors from "./weather.selectors";
+import * as WeatherActions from './weather.actions';
+import * as WeatherSelectors from './weather.selectors';
 
 @Injectable()
 export class WeatherFacade {
@@ -18,10 +18,10 @@ export class WeatherFacade {
   }
 
   loadWeatherForLocation(location: string) {
-    this.store.dispatch(WeatherActions.loadWeather({location}))
+    this.store.dispatch(WeatherActions.loadWeather({ location }));
   }
 
   saveMainLocation(location: string) {
-    this.store.dispatch(WeatherActions.saveMainLocation({location}))
+    this.store.dispatch(WeatherActions.saveMainLocation({ location }));
   }
 }

@@ -1,34 +1,34 @@
-import "../../testing-helpers/window.mock";
-import { MockBuilder, MockRender, MockService, ngMocks } from "ng-mocks";
-import { WeatherPageComponent } from "./weather-page.component";
-import { WeatherPageModule } from "./weather-page.module";
-import { WeatherService } from "./service/weather.service";
-import { of } from "rxjs";
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
-import { HarnessLoader } from "@angular/cdk/testing";
-import { TestbedHarnessEnvironment } from "@angular/cdk/testing/testbed";
-import { environment } from "../../../environments/environment";
-import { MatCardHarness } from "@angular/material/card/testing";
-import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import { MatInputHarness } from "@angular/material/input/testing";
-import { MatButtonHarness } from "@angular/material/button/testing";
-import { MatCardModule } from "@angular/material/card";
-import { WeatherIntroductionComponent } from "./paragraphs/introduction/weather-introduction.component";
-import { WeatherExplanationComponent } from "./paragraphs/explanation/weather-explanation.component";
-import { MatExpansionModule } from "@angular/material/expansion";
-import { MatInputModule } from "@angular/material/input";
-import { MatButtonModule } from "@angular/material/button";
-import { ReactiveFormsModule } from "@angular/forms";
-import { MatDividerModule } from "@angular/material/divider";
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import { WeatherLocation, WeatherModule } from "@cntws/weather";
-import { ErrorMessageComponent, LoadingComponent } from "@cntws/shared";
-import { StoreModule } from "@ngrx/store";
-import * as fromWeather from "./+state/weather.reducer";
-import { EffectsModule } from "@ngrx/effects";
-import { WeatherEffects } from "./+state/weather.effects";
-import { WeatherFacade } from "./+state/weather.facade";
+import '../../testing-helpers/window.mock';
+import { MockBuilder, MockRender, MockService, ngMocks } from 'ng-mocks';
+import { WeatherPageComponent } from './weather-page.component';
+import { WeatherPageModule } from './weather-page.module';
+import { WeatherService } from './service/weather.service';
+import { of } from 'rxjs';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HarnessLoader } from '@angular/cdk/testing';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { environment } from '../../../environments/environment';
+import { MatCardHarness } from '@angular/material/card/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputHarness } from '@angular/material/input/testing';
+import { MatButtonHarness } from '@angular/material/button/testing';
+import { MatCardModule } from '@angular/material/card';
+import { WeatherIntroductionComponent } from './paragraphs/introduction/weather-introduction.component';
+import { WeatherExplanationComponent } from './paragraphs/explanation/weather-explanation.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { WeatherLocation, WeatherModule } from '@cntws/weather';
+import { ErrorMessageComponent, LoadingComponent } from '@cntws/shared';
+import { StoreModule } from '@ngrx/store';
+import * as fromWeather from './+state/weather.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { WeatherEffects } from './+state/weather.effects';
+import { WeatherFacade } from './+state/weather.facade';
 import { ApiModelGenerators } from '@cntws/testing';
 
 type serviceMockProps = {
@@ -73,7 +73,7 @@ describe('Weather Page: A user visiting the page', () => {
           ErrorMessageComponent,
           LoadingComponent,
           ...MaterialModules,
-          StoreModule.forRoot({[fromWeather.WEATHER_FEATURE_KEY]: fromWeather.weatherReducer}),
+          StoreModule.forRoot({ [fromWeather.WEATHER_FEATURE_KEY]: fromWeather.weatherReducer }),
           EffectsModule.forRoot([WeatherEffects]),
         ],
         providers: [WeatherService, WeatherFacade],

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import {WeatherLocation} from "../../model/weather.model";
+import { WeatherLocation } from '../../model/weather.model';
 
 @Component({
   selector: 'cntws-weather-results',

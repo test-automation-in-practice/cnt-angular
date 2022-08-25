@@ -1,8 +1,8 @@
 import { MockBuilder, MockRender } from 'ng-mocks';
 import { WeatherResultsComponent } from './weather-results.component';
 import { By } from '@angular/platform-browser';
-import {WeatherModule} from "../../weather.module";
-import {WeatherLocation} from "../../model/weather.model";
+import { WeatherModule } from '../../weather.module';
+import { WeatherLocation } from '../../model/weather.model';
 
 describe('Weather Results: A user', () => {
   describe('viewing their results', () => {
