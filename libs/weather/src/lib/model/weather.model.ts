@@ -1,5 +1,5 @@
 export interface WeatherLocation {
-  id: number,
+  id: number;
   temp: number;
   location: string;
 }

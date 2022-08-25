@@ -1,6 +1,6 @@
-import { Component } from "@angular/core";
-import { WeatherLocation } from "@cntws/weather";
-import { WeatherFacade } from "./+state/weather.facade";
+import { Component } from '@angular/core';
+import { WeatherLocation } from '@cntws/weather';
+import { WeatherFacade } from './+state/weather.facade';
 import { map } from 'rxjs';
 
 @Component({
@@ -11,7 +11,7 @@ import { map } from 'rxjs';
 export class WeatherPageComponent {
   weather$ = this.weather.weather$;
   warning$ = this.weather.error$;
-  isLoading$ = this.weather.loaded$.pipe(map(l => !l));
+  isLoading$ = this.weather.loaded$.pipe(map((l) => !l));
   mainLocation$ = this.weather.mainLocation$;
 
   constructor(private weather: WeatherFacade) {

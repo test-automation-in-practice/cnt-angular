@@ -14,7 +14,7 @@ import {
   loadWeatherSuccess,
   saveMainLocation,
   saveMainLocationFailure,
-  saveMainLocationSuccess
+  saveMainLocationSuccess,
 } from './weather.actions';
 import { cold, hot } from 'jasmine-marbles';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -27,15 +27,8 @@ describe('WeatherEffects', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule
-      ],
-      providers: [
-        WeatherEffects,
-        provideMockActions(() => actions),
-        provideMockStore(),
-        WeatherService
-      ]
+      imports: [HttpClientTestingModule],
+      providers: [WeatherEffects, provideMockActions(() => actions), provideMockStore(), WeatherService],
     });
     service = TestBed.inject(WeatherService);
     effects = TestBed.inject(WeatherEffects);
@@ -62,7 +55,7 @@ describe('WeatherEffects', () => {
 
       const message = 'An error message';
       const error = {
-        error: { message }
+        error: { message },
       };
       const serviceResult = cold('-#|', {}, error);
       jest.spyOn(service, 'getMainLocation').mockReturnValue(serviceResult);
@@ -76,15 +69,13 @@ describe('WeatherEffects', () => {
 
   describe('receiving an action to load the weather', () => {
     test.each([
-      [loadWeather({location: 'Stuttgart'})],
-      [loadMainLocationSuccess({location: 'Stuttgart'})],
-      [saveMainLocationSuccess({location: 'Stuttgart'})]
+      [loadWeather({ location: 'Stuttgart' })],
+      [loadMainLocationSuccess({ location: 'Stuttgart' })],
+      [saveMainLocationSuccess({ location: 'Stuttgart' })],
     ])('should return the loaded weather if the service has no error for the action %s', (action) => {
       actions = hot('-a', { a: action });
 
-      const weather: WeatherLocation[] = [
-        { id: 1, temp: 25, location: 'Stuttgart' }
-      ];
+      const weather: WeatherLocation[] = [{ id: 1, temp: 25, location: 'Stuttgart' }];
       const serviceResult = cold('-a|', { a: weather });
       jest.spyOn(service, 'getWeatherForLocation').mockReturnValue(serviceResult);
 
@@ -92,18 +83,18 @@ describe('WeatherEffects', () => {
       const expectedResult = cold('--a', { a: resultAction });
 
       expect(effects.loadWeather$).toBeObservable(expectedResult);
-    })
+    });
 
     test.each([
-      [loadWeather({location: 'Stuttgart'})],
-      [loadMainLocationSuccess({location: 'Stuttgart'})],
-      [saveMainLocationSuccess({location: 'Stuttgart'})]
+      [loadWeather({ location: 'Stuttgart' })],
+      [loadMainLocationSuccess({ location: 'Stuttgart' })],
+      [saveMainLocationSuccess({ location: 'Stuttgart' })],
     ])('should return the error if the service has an error for the action %s', (action) => {
       actions = hot('-a', { a: action });
 
       const message = 'An error message';
       const error = {
-        error: { message }
+        error: { message },
       };
       const serviceResult = cold('-#|', {}, error);
       jest.spyOn(service, 'getWeatherForLocation').mockReturnValue(serviceResult);
@@ -137,7 +128,7 @@ describe('WeatherEffects', () => {
 
       const message = 'An error message';
       const error = {
-        error: { message }
+        error: { message },
       };
       const serviceResult = cold('-#|', {}, error);
       jest.spyOn(service, 'saveMainLocation').mockReturnValue(serviceResult);

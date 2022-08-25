@@ -9,7 +9,7 @@
       class="block pb-4"
     ></cntws-location>
     <cntws-weather-results
-      *ngIf="(weather$ | async)?.length??0 > 0"
+      *ngIf="(weather$ | async)?.length ?? 0 > 0"
       [weatherLocations]="(weather$ | async)!"
       (savedLocation)="saveLocation($event)"
       class="block pb-4"

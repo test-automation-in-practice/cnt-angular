@@ -1,7 +1,7 @@
-import { Injectable } from "@angular/core";
-import { environment } from "../../../../environments/environment";
-import { HttpClient } from "@angular/common/http";
-import { map, Observable } from "rxjs";
+import { Injectable } from '@angular/core';
+import { environment } from '../../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { map, Observable } from 'rxjs';
 import { LocationApiModel, WeatherApiModel, WeatherLocation } from '@cntws/weather';
 
 @Injectable()
@@ -18,20 +18,14 @@ export class WeatherService {
   }
 
   getMainLocation(): Observable<string> {
-    return this.http
-      .get<LocationApiModel>(WeatherService.ENDPOINTS.mainLocation())
-      .pipe(map(loc => loc.name));
+    return this.http.get<LocationApiModel>(WeatherService.ENDPOINTS.mainLocation()).pipe(map((loc) => loc.name));
   }
 
   getWeatherForLocation(location: string): Observable<WeatherLocation[]> {
-    return this.http
-      .get<WeatherApiModel[]>(WeatherService.ENDPOINTS.queryLocation(location))
-      .pipe(map(WeatherService.mapApiModel));
+    return this.http.get<WeatherApiModel[]>(WeatherService.ENDPOINTS.queryLocation(location)).pipe(map(WeatherService.mapApiModel));
   }
 
   saveMainLocation(location: string): Observable<string> {
-    return this.http
-      .post<LocationApiModel>(WeatherService.ENDPOINTS.mainLocation(), { name: location })
-      .pipe(map(loc => loc.name));
+    return this.http.post<LocationApiModel>(WeatherService.ENDPOINTS.mainLocation(), { name: location }).pipe(map((loc) => loc.name));
   }
 }

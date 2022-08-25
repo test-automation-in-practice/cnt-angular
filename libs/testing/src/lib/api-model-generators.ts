@@ -1,6 +1,5 @@
 import { LocationApiModel, WeatherApiModel } from '@cntws/weather';
 
-
 const createWeatherApiModel: (name: string, temp: number) => WeatherApiModel[] = (name: string, temp: number) => {
   return [{ id: Math.random() * Math.random() * 10000, temp, name }];
 };

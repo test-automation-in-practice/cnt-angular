@@ -1,8 +1,8 @@
-import { createEntityAdapter, EntityAdapter, EntityState } from "@ngrx/entity";
-import { Action, createReducer, on } from "@ngrx/store";
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { Action, createReducer, on } from '@ngrx/store';
 
-import * as WeatherActions from "./weather.actions";
-import { WeatherLocation } from "@cntws/weather";
+import * as WeatherActions from './weather.actions';
+import { WeatherLocation } from '@cntws/weather';
 
 export const WEATHER_FEATURE_KEY = 'weather';
 
@@ -25,12 +25,12 @@ export const initialWeatherState: WeatherState = weatherAdapter.getInitialState(
 const reducer = createReducer(
   initialWeatherState,
   on(WeatherActions.initWeather, (state) => ({ ...state, loaded: false, error: null })),
-  on(WeatherActions.loadMainLocationSuccess, (state, {location}) => ({...state, loaded: true, error: null, mainLocation: location })),
+  on(WeatherActions.loadMainLocationSuccess, (state, { location }) => ({ ...state, loaded: true, error: null, mainLocation: location })),
   on(WeatherActions.loadWeatherSuccess, (state, { weather }) => weatherAdapter.setAll(weather, { ...state, loaded: true, error: null })),
-  on(WeatherActions.saveMainLocationSuccess, (state, {location}) => ({...state, loaded: true, error: null, mainLocation: location })),
+  on(WeatherActions.saveMainLocationSuccess, (state, { location }) => ({ ...state, loaded: true, error: null, mainLocation: location })),
   on(WeatherActions.loadWeatherFailure, (state, { error }) => weatherAdapter.setAll([], { ...state, error: error, loaded: true })),
   on(WeatherActions.saveMainLocationFailure, (state, { error }) => weatherAdapter.setAll([], { ...state, error: error, loaded: true })),
-  on(WeatherActions.loadMainLocationFailure, (state, { error }) => weatherAdapter.setAll([], { ...state, error: error, loaded: true })),
+  on(WeatherActions.loadMainLocationFailure, (state, { error }) => weatherAdapter.setAll([], { ...state, error: error, loaded: true }))
 );
 
 export function weatherReducer(state: WeatherState | undefined, action: Action) {
