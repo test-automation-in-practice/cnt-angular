@@ -5,8 +5,8 @@ import { Setup } from '../support/helpers/setup';
 describe('Weather page', () => {
   before(() => {
     App.navigateTo('Weather');
-    Setup.resetMainLocation();
-    Setup.resetLocations();
+    Setup.database.resetMainLocation();
+    Setup.database.resetLocations();
     cy.get('cntws-location').should('exist');
   });
 
@@ -19,5 +19,10 @@ describe('Weather page', () => {
     const location = 'ThisCityDoesNotExist';
     WeatherApp.searchLocation(location);
     cy.get('cntws-error-message').should('contain.text', `${location}`);
+  });
+
+  afterEach(() => {
+    Setup.database.resetMainLocation();
+    Setup.database.resetLocations();
   });
 });

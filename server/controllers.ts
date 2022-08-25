@@ -13,7 +13,6 @@ const elementNotFoundAction = (req: any, res: any) => res.status(404).jsonp({ me
 
 const validResponseCondition = (req: any, res: any) => true;
 const validResponseAction = (req: any, res: any) => res.jsonp(res.locals.data);
-
 const controlFlows: ControlFlow[] = [
   { condition: numbersAreNotAllowedCondition, action: numbersAreNotAllowedAction },
   { condition: elementNotFoundCondition, action: elementNotFoundAction },
