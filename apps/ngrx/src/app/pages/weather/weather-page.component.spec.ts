@@ -9,7 +9,6 @@ import { HttpClientTestingModule, HttpTestingController } from "@angular/common/
 import { HarnessLoader } from "@angular/cdk/testing";
 import { TestbedHarnessEnvironment } from "@angular/cdk/testing/testbed";
 import { environment } from "../../../environments/environment";
-import { ApiModelGenerators } from "../../testing-helpers/api-model-generators";
 import { MatCardHarness } from "@angular/material/card/testing";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { MatInputHarness } from "@angular/material/input/testing";
@@ -30,6 +29,7 @@ import * as fromWeather from "./+state/weather.reducer";
 import { EffectsModule } from "@ngrx/effects";
 import { WeatherEffects } from "./+state/weather.effects";
 import { WeatherFacade } from "./+state/weather.facade";
+import { ApiModelGenerators } from '@cntws/testing';
 
 type serviceMockProps = {
   isLoading?: boolean;

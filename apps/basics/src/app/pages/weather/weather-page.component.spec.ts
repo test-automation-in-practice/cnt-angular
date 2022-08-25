@@ -9,7 +9,6 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { environment } from '../../../environments/environment';
-import { ApiModelGenerators } from '../../testing-helpers/api-model-generators';
 import { MatCardHarness } from '@angular/material/card/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputHarness } from '@angular/material/input/testing';
@@ -25,6 +24,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { WeatherLocation, WeatherModule } from '@cntws/weather';
 import { ErrorMessageComponent, LoadingComponent } from '@cntws/shared';
+import { ApiModelGenerators } from '@cntws/testing';
 
 type serviceMockProps = {
   isLoading?: boolean;

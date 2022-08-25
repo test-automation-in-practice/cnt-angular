@@ -1,4 +1,3 @@
-// TODO extract me into a lib
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: jest.fn().mockImplementation((query) => ({

@@ -5,16 +5,14 @@ import { EffectsModule } from '@ngrx/effects';
 import { WeatherEffects } from './weather.effects';
 import { NgModule } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { toPromise } from '../../../testing-helpers/observables';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { WeatherService } from '../service/weather.service';
 import { environment } from '../../../../environments/environment';
-import { ApiModelGenerators } from '../../../testing-helpers/api-model-generators';
 import { WeatherLocation } from '@cntws/weather';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { getMainLocation, getWeather, getWeatherError, getWeatherLoaded } from './weather.selectors';
-import { main } from '@angular/compiler-cli/src/main';
 import { initWeather, loadWeather, saveMainLocation } from './weather.actions';
+import { ApiModelGenerators, toPromise } from '@cntws/testing';
 
 describe('WeatherFacade', () => {
 

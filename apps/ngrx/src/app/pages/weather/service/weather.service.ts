@@ -2,17 +2,7 @@ import { Injectable } from "@angular/core";
 import { environment } from "../../../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { map, Observable } from "rxjs";
-import { WeatherLocation } from "@cntws/weather";
-
-export interface WeatherApiModel {
-  id: number;
-  temp: number;
-  name: string;
-}
-
-export interface LocationApiModel {
-  name: string;
-}
+import { LocationApiModel, WeatherApiModel, WeatherLocation } from '@cntws/weather';
 
 @Injectable()
 export class WeatherService {
