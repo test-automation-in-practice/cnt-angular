@@ -5,20 +5,15 @@
     "prepare": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "commands": ["npm run server", "npm run start:basics"],
-        "readyWhen": "Angular Live Development Server is listening on localhost:4200"
+        "commands": ["npm run start:basics -- --port=4201"],
+        "readyWhen": "Angular Live Development Server is listening on localhost:4201"
       }
     },
     "e2e": {
       "executor": "@nrwl/cypress:cypress",
       "options": {
         "cypressConfig": "apps/basics-e2e/cypress.json",
-        "devServerTarget": "basics-e2e:prepare:development"
-      },
-      "configurations": {
-        "production": {
-          "devServerTarget": "basics:serve:production"
-        }
+        "devServerTarget": "basics-e2e:prepare"
       }
     },
     "lint": {
