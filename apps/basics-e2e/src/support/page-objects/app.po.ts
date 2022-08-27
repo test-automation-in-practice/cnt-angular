@@ -2,7 +2,7 @@ import { getHarness } from '@jscutlery/cypress-harness';
 import { MatButtonHarness } from '@angular/material/button/testing';
 
 const navigateTo = (navbutton: string) => {
-  cy.visit('http://localhost:4200/');
+  cy.visit('http://localhost:4201/');
   getHarness(MatButtonHarness.with({ text: navbutton })).then((button) => button.click());
 };
 
