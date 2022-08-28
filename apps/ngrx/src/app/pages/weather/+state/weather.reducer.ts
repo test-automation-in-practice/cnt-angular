@@ -12,10 +12,6 @@ export interface WeatherState extends EntityState<WeatherLocation> {
   mainLocation?: string | null;
 }
 
-export interface WeatherPartialState {
-  readonly [WEATHER_FEATURE_KEY]: WeatherState;
-}
-
 export const weatherAdapter: EntityAdapter<WeatherLocation> = createEntityAdapter<WeatherLocation>();
 
 export const initialWeatherState: WeatherState = weatherAdapter.getInitialState({

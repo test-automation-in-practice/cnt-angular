@@ -50,7 +50,7 @@ describe('Weather Page: A user visiting the page', () => {
    * These tests are testing the complete module and give us confidence for bigger refactorings.
    * They are rather brittle and thus, we have to use them carefully.
    * Further, they do not give good insights in why a specific scenario is failing.
-   * This loads to a need of additional tests for your components to get better feedback.
+   * This leads to a need of additional tests for your components to get better feedback.
    */
   describe('and having their data loaded', () => {
     let fixture: ComponentFixture<WeatherPageComponent>;
@@ -114,14 +114,14 @@ describe('Weather Page: A user visiting the page', () => {
 
       const locationCard = await loader.getHarness(MatCardHarness.with({ subtitle: new RegExp(`.*(location).*`) }));
       const locationInput = await locationCard.getHarness(MatInputHarness);
-      const searchedWeather = 'Frankfurt';
-      await locationInput.setValue(searchedWeather);
+      const searchedLocation = 'Frankfurt';
+      await locationInput.setValue(searchedLocation);
       const searchButton = await locationCard.getHarness(MatButtonHarness);
       await searchButton.click();
-      const searchedWeatherRequest = controller.expectOne(`${environment.weatherApi}/locations?q=${searchedWeather}`);
-      searchedWeatherRequest.flush(ApiModelGenerators.createWeatherApiModel(searchedWeather, temp));
+      const searchedWeatherRequest = controller.expectOne(`${environment.weatherApi}/locations?q=${searchedLocation}`);
+      searchedWeatherRequest.flush(ApiModelGenerators.createWeatherApiModel(searchedLocation, temp));
 
-      await loader.getHarness(MatCardHarness.with({ title: searchedWeather }));
+      await loader.getHarness(MatCardHarness.with({ title: searchedLocation }));
     });
   });
 
