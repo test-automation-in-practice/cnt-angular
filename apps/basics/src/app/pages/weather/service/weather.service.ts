@@ -13,8 +13,8 @@ export class WeatherService {
 
   private _weather$ = new BehaviorSubject<WeatherLocation[]>([]);
   readonly weather$: Observable<WeatherLocation[]> = this._weather$.asObservable();
-  private _warning = new BehaviorSubject<string | undefined>(undefined);
-  readonly warning$: Observable<string | undefined> = this._warning.asObservable();
+  private _warning$ = new BehaviorSubject<string | undefined>(undefined);
+  readonly warning$: Observable<string | undefined> = this._warning$.asObservable();
   private _isLoading$ = new BehaviorSubject<boolean>(false);
   readonly isLoading$: Observable<boolean> = this._isLoading$.asObservable();
   private _mainLocation$ = new BehaviorSubject<string | undefined>(undefined);
@@ -31,7 +31,7 @@ export class WeatherService {
     this.http
       .get<LocationApiModel>(WeatherService.ENDPOINTS.mainLocation())
       .pipe(
-        tap(() => this._warning.next(undefined)),
+        tap(() => this._warning$.next(undefined)),
         tap(() => this._isLoading$.next(false)),
         catchError((error) => this.handleError(error, { name: undefined }))
       )
@@ -43,7 +43,7 @@ export class WeatherService {
     this.http
       .get<WeatherApiModel[]>(WeatherService.ENDPOINTS.queryLocation(location))
       .pipe(
-        tap(() => this._warning.next(undefined)),
+        tap(() => this._warning$.next(undefined)),
         tap(() => this._isLoading$.next(false)),
         map((apiModel) => WeatherService.mapApiModel(apiModel)),
         catchError((error) => this.handleError(error, []))
@@ -56,7 +56,7 @@ export class WeatherService {
     this.http
       .post<LocationApiModel>(WeatherService.ENDPOINTS.mainLocation(), { name: location })
       .pipe(
-        tap(() => this._warning.next(undefined)),
+        tap(() => this._warning$.next(undefined)),
         tap(() => this._isLoading$.next(false)),
         catchError((error) => this.handleError(error, undefined))
       )
@@ -64,7 +64,7 @@ export class WeatherService {
   }
 
   private handleError<S>(error: HttpErrorResponse, endState: S) {
-    this._warning.next(error.error.message);
+    this._warning$.next(error.error.message);
     this._isLoading$.next(false);
     return of(endState);
   }

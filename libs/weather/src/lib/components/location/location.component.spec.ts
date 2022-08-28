@@ -15,7 +15,11 @@ import { MockBuilder, MockRender } from 'ng-mocks';
 import { WeatherModule } from '../../weather.module';
 
 const getErrors = (errors: string) => {
-  return LocationComponent.locationErrors.filter((error) => errors.includes(error.errorStatus))[0].errorMessage;
+  return [
+    { errorStatus: 'required', errorMessage: 'Please enter a location before searching!' },
+    { errorStatus: 'minlength', errorMessage: 'At least 3 characters are needed!' },
+    { errorStatus: 'pattern', errorMessage: 'Numbers are not allowed!' },
+  ].filter((error) => errors.includes(error.errorStatus))[0].errorMessage;
 };
 
 /**

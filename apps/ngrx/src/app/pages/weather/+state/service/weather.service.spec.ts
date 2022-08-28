@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { WeatherService } from './weather.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../../environments/environment';
 import { ApiModelGenerators, toPromise } from '@cntws/testing';
 
 describe('WeatherService', () => {
