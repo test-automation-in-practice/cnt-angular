@@ -50,7 +50,7 @@ describe('Weather Page: A user visiting the page', () => {
    * These tests are testing the complete module and give us confidence for bigger refactorings.
    * They are rather brittle and thus, we have to use them carefully.
    * Further, they do not give good insights in why a specific scenario is failing.
-   * This loads to a need of additional tests for your components to get better feedback.
+   * This leads to a need of additional tests for your components to get better feedback.
    */
   describe('and having their data loaded', () => {
     let fixture: ComponentFixture<WeatherPageComponent>;

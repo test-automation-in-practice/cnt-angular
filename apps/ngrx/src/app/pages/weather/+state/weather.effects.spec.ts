@@ -4,7 +4,7 @@ import { Action } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
 import { Observable } from 'rxjs';
 import { WeatherEffects } from './weather.effects';
-import { WeatherService } from '../service/weather.service';
+import { WeatherService } from './service/weather.service';
 import {
   initWeather,
   loadMainLocationFailure,

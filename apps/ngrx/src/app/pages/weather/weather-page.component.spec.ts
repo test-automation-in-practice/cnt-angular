@@ -2,7 +2,7 @@ import '../../testing-helpers/window.mock';
 import { MockBuilder, MockRender, MockService, ngMocks } from 'ng-mocks';
 import { WeatherPageComponent } from './weather-page.component';
 import { WeatherPageModule } from './weather-page.module';
-import { WeatherService } from './service/weather.service';
+import { WeatherService } from './+state/service/weather.service';
 import { of } from 'rxjs';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
@@ -55,7 +55,7 @@ describe('Weather Page: A user visiting the page', () => {
    * These tests are testing the complete module and give us confidence for bigger refactorings.
    * They are rather brittle and thus, we have to use them carefully.
    * Further, they do not give good insights in why a specific scenario is failing.
-   * This loads to a need of additional tests for your components to get better feedback.
+   * This leads to a need of additional tests for your components to get better feedback.
    */
   describe('and having their data loaded', () => {
     let fixture: ComponentFixture<WeatherPageComponent>;

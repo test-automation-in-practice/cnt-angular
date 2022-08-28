@@ -6,7 +6,7 @@ import { WeatherEffects } from './weather.effects';
 import { NgModule } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { WeatherService } from '../service/weather.service';
+import { WeatherService } from './service/weather.service';
 import { environment } from '../../../../environments/environment';
 import { WeatherLocation } from '@cntws/weather';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
@@ -15,6 +15,17 @@ import { initWeather, loadWeather, saveMainLocation } from './weather.actions';
 import { ApiModelGenerators, toPromise } from '@cntws/testing';
 
 describe('WeatherFacade', () => {
+  /**
+   * Testing state management integrative is getting complex fast but gives
+   * confidence while refactoring internal state handling logic.
+   * Thus, a good strategy is to test important behaviors that ensure that the
+   * state management is working together on an integrative level and move edge
+   * case testing to the specific components (such as selectors, reducers,
+   * effects) to reduce complexity and keep each test focused on the important
+   * parts.
+   * If we have good test coverage for all aspects of state management,
+   * integrative tests can become obsolete.
+   */
   describe('integrative testing', () => {
     let facade: WeatherFacade;
     let store: Store;
