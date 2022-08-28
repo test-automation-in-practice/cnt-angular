@@ -3,7 +3,7 @@ import { WeatherLocation } from '@cntws/weather';
 
 export const initWeather = createAction('[Weather Page] Init');
 
-export const loadMainLocationSuccess = createAction('[Weather/API] Load main location success', props<{ location: string }>());
+export const loadMainLocationSuccess = createAction('[Weather/API] Load main location success', props<{ location: string | undefined }>());
 
 export const loadMainLocationFailure = createAction('[Weather/API] Load main location failure', props<{ error: string }>());
 

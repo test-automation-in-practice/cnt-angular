@@ -86,6 +86,23 @@ describe('WeatherEffects', () => {
     });
 
     test.each([
+      [loadWeather({ location: '' })],
+      [loadMainLocationSuccess({ location: '' })],
+      [loadMainLocationSuccess({ location: undefined })],
+      [saveMainLocationSuccess({ location: '' })],
+    ])('should ignore empty locations (%s)', (action) => {
+      actions = hot('-a', { a: action });
+
+      const weather: WeatherLocation[] = [{ id: 1, temp: 25, location: 'Stuttgart' }];
+      const serviceResult = cold('-a|', { a: weather });
+      jest.spyOn(service, 'getWeatherForLocation').mockReturnValue(serviceResult);
+
+      const expectedResult = cold('', {});
+
+      expect(effects.loadWeather$).toBeObservable(expectedResult);
+    });
+
+    test.each([
       [loadWeather({ location: 'Stuttgart' })],
       [loadMainLocationSuccess({ location: 'Stuttgart' })],
       [saveMainLocationSuccess({ location: 'Stuttgart' })],
