@@ -6,7 +6,7 @@ const publicPath = 'http://localhost:4400/';
 let outputOptions = {};
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-module.exports = (on: (arg0: string, arg1: any) => void, config: any) => {
+export default (on: (arg0: string, arg1: any) => void, config: any) => {
   const modifiedBaseConfig = altWebpackConfig.getWebpackConfig(config);
 
   modifiedBaseConfig.module.rules.unshift({

@@ -4,5 +4,3 @@
 // ***********************************************************
 
 import './commands';
-import '@jscutlery/cypress-harness/support';
-import 'cypress-wait-until';
