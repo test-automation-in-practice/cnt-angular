@@ -3,7 +3,7 @@
   "projectType": "application",
   "targets": {
     "prepare": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "commands": ["npm run start:ngrx"],
         "readyWhen": "Angular Live Development Server is listening on localhost:4200"
@@ -12,8 +12,9 @@
     "e2e": {
       "executor": "@nrwl/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/ngrx-e2e/cypress.json",
-        "devServerTarget": "ngrx-e2e:prepare"
+        "cypressConfig": "apps/ngrx-e2e/cypress.config.ts",
+        "devServerTarget": "ngrx-e2e:prepare",
+        "testingType": "e2e"
       }
     },
     "lint": {

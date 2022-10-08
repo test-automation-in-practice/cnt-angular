@@ -1,9 +1,6 @@
-import { getHarness } from '@jscutlery/cypress-harness';
-import { MatButtonHarness } from '@angular/material/button/testing';
-
 const navigateTo = (navbutton: string) => {
   cy.visit('http://localhost:4200/');
-  getHarness(MatButtonHarness.with({ text: navbutton })).then((button) => button.click());
+  cy.get('a').contains(navbutton).click();
 };
 
 export const App = {
