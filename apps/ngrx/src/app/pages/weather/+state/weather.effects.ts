@@ -3,14 +3,14 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import * as WeatherActions from './weather.actions';
 import { WeatherService } from './service/weather.service';
-import { catchError, exhaustMap, filter, map, of } from 'rxjs';
+import { catchError, filter, map, of, switchMap } from 'rxjs';
 
 @Injectable()
 export class WeatherEffects {
   init$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(WeatherActions.initWeather),
-      exhaustMap((_) => {
+      switchMap((_) => {
         return this.weatherService.getMainLocation().pipe(
           map((location) => WeatherActions.loadMainLocationSuccess({ location })),
           catchError((error) => of(WeatherActions.loadMainLocationFailure({ error: error.error.message })))
@@ -23,7 +23,7 @@ export class WeatherEffects {
     return this.actions$.pipe(
       ofType(WeatherActions.loadWeather, WeatherActions.loadMainLocationSuccess, WeatherActions.saveMainLocationSuccess),
       filter((action) => !!action.location),
-      exhaustMap((action) => {
+      switchMap((action) => {
         return this.weatherService.getWeatherForLocation(action.location as string).pipe(
           map((weather) => WeatherActions.loadWeatherSuccess({ weather })),
           catchError((error) => of(WeatherActions.loadWeatherFailure({ error: error.error.message })))
@@ -35,7 +35,7 @@ export class WeatherEffects {
   saveMainLocation$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(WeatherActions.saveMainLocation),
-      exhaustMap((action) => {
+      switchMap((action) => {
         return this.weatherService.saveMainLocation(action.location).pipe(
           map((location) => WeatherActions.saveMainLocationSuccess({ location })),
           catchError((error) => of(WeatherActions.saveMainLocationFailure({ error: error.error.message })))

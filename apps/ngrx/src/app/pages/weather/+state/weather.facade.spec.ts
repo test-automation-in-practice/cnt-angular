@@ -274,24 +274,30 @@ describe('WeatherFacade', () => {
     });
 
     describe('manipulating data', () => {
+      let dispatchSpy: jest.SpyInstance;
+
+      beforeEach(() => {
+        dispatchSpy = jest.spyOn(store, 'dispatch');
+      });
+
       it('should dispatch the init weather action on init', () => {
         jest.spyOn(store, 'dispatch');
         facade.init();
-        expect(store.dispatch).toHaveBeenCalledWith(initWeather());
+        expect(dispatchSpy).toHaveBeenCalledWith(initWeather());
       });
 
       it('should dispatch the load weather action on loading the weather for a location', () => {
         const location = 'Stuttgart';
         jest.spyOn(store, 'dispatch');
         facade.loadWeatherForLocation(location);
-        expect(store.dispatch).toHaveBeenCalledWith(loadWeather({ location }));
+        expect(dispatchSpy).toHaveBeenCalledWith(loadWeather({ location }));
       });
 
       it('should dispatch the save main location action on saving the main location', () => {
         const location = 'Stuttgart';
         jest.spyOn(store, 'dispatch');
         facade.saveMainLocation(location);
-        expect(store.dispatch).toHaveBeenCalledWith(saveMainLocation({ location }));
+        expect(dispatchSpy).toHaveBeenCalledWith(saveMainLocation({ location }));
       });
     });
   });
