@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`A loading component should render a spinner 1`] = `
-<mock-render
-  __ngContext__="0"
->
+<mock-render>
   <cntws-loading>
     <mat-spinner />
   </cntws-loading>

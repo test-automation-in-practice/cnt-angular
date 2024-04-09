@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const webpackPreprocessor = require('@cypress/webpack-preprocessor');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const altWebpackConfig = require('@nrwl/cypress/plugins/preprocessor');
+const altWebpackConfig = require('@nx/cypress/plugins/preprocessor');
 const publicPath = 'http://localhost:4400/';
 let outputOptions = {};
 

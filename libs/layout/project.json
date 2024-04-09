@@ -1,21 +1,19 @@
 {
+  "name": "layout",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/layout/src",
   "prefix": "cntws",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/layout"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/layout"],
       "options": {
-        "jestConfig": "libs/layout/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/layout/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["libs/layout/**/*.ts", "libs/layout/**/*.html"]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": []

@@ -3,7 +3,7 @@ import { WeatherApp } from '../support/page-objects/weather.po';
 import { Setup } from '../support/helpers/setup';
 
 describe('Weather page', () => {
-  before(() => {
+  beforeEach(() => {
     App.navigateTo('Weather');
     Setup.database.resetMainLocation();
     Setup.database.resetLocations();

@@ -1,4 +1,6 @@
 {
+  "name": "ngrx",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/ngrx/src",
   "prefix": "cntws",
@@ -54,10 +56,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "ngrx:build:production"
+          "buildTarget": "ngrx:build:production"
         },
         "development": {
-          "browserTarget": "ngrx:build:development"
+          "buildTarget": "ngrx:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -65,21 +67,17 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "ngrx:build"
+        "buildTarget": "ngrx:build"
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["apps/ngrx/**/*.ts", "apps/ngrx/**/*.html"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/ngrx"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/ngrx"],
       "options": {
-        "jestConfig": "apps/ngrx/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/ngrx/jest.config.ts"
       }
     }
   },

@@ -35,7 +35,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
       }
     ),
     EffectsModule.forRoot([]),
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    !environment.production ? StoreDevtoolsModule.instrument({ connectInZone: true }) : [],
     StoreRouterConnectingModule.forRoot(),
   ],
   providers: [],

@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Location: A user viewing the component should see a consistent layout if no location is saved 1`] = `
-<mock-render
-  __ngContext__={[Function Number]}
->
+<mock-render>
   <cntws-location>
     <mat-card>
       <mat-card-content>
@@ -22,7 +20,7 @@ exports[`Location: A user viewing the component should see a consistent layout i
               placeholder="Enter location"
             />
             <mat-error>
-              Please enter a location before searching!
+              Please enter a location before searching! 
             </mat-error>
           </mat-form-field>
           <button
@@ -39,14 +37,14 @@ exports[`Location: A user viewing the component should see a consistent layout i
 `;
 
 exports[`Location: A user viewing the component should see a consistent layout with their saved location 1`] = `
-<mock-render
-  __ngContext__={[Function Number]}
->
+<mock-render>
   <cntws-location>
     <mat-card>
-      <mat-card-subtitle>
-        Current saved location: Stuttgart
-      </mat-card-subtitle>
+      <mat-card-header>
+        <mat-card-subtitle>
+          Current saved location: Stuttgart
+        </mat-card-subtitle>
+      </mat-card-header>
       <mat-card-content>
         <form
           class="flex content-center flex-col"
@@ -63,7 +61,7 @@ exports[`Location: A user viewing the component should see a consistent layout w
               placeholder="Enter location"
             />
             <mat-error>
-              Please enter a location before searching!
+              Please enter a location before searching! 
             </mat-error>
           </mat-form-field>
           <button
