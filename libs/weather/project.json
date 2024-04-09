@@ -1,21 +1,19 @@
 {
+  "name": "weather",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/weather/src",
   "prefix": "cntws",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/weather"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/weather"],
       "options": {
-        "jestConfig": "libs/weather/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/weather/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["libs/weather/**/*.ts", "libs/weather/**/*.html"]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": []

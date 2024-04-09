@@ -3,3 +3,7 @@
 /dist
 /coverage
 /.angular
+
+/.nx/cache
+
+/apps/basics

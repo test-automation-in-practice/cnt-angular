@@ -1,21 +1,19 @@
 {
+  "name": "shared",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/shared/src",
   "prefix": "cntws",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/shared"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/shared"],
       "options": {
-        "jestConfig": "libs/shared/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/shared/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["libs/shared/**/*.ts", "libs/shared/**/*.html"]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": []
